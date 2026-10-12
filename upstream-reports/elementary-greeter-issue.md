@@ -36,7 +36,7 @@ Both sides then wait for each other indefinitely.
 
 Remember whether a prompt is outstanding. In `do_connect ()`, respond only if one is; otherwise keep the credential and send it from `show_prompt ()` when the prompt arrives, and clear it in `authentication_complete ()` and whenever authentication is restarted. That removes the hang; the password still waits for the fingerprint timeout, which is a property of the PAM order rather than of the greeter.
 
-We run a larger local patch that depends on a changed PAM order (password prompt first, empty response starts the reader), so it is not offered as a pull request, but it shows the state tracking: REPO_URL/blob/main/login-screen/greeter-password-first.patch
+We run a larger local patch that depends on a changed PAM order (password prompt first, empty response starts the reader), so it is not offered as a pull request, but it shows the state tracking: https://github.com/wateenellende/hp-elan-0c00-linux/blob/main/login-screen/greeter-password-first.patch
 
 ## Platform
 

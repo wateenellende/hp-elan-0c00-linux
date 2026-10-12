@@ -6,7 +6,7 @@
 
 We got the 04f3:0c00 reader in an HP Pavilion 14-ec0xxx (firmware 2.81) fully working with this driver: enroll, verify, no-match, cancel, delete and clear storage, through the example programs and through fprintd 1.94.3 with PAM. It took two patches on top of the `elanmoc2` branch at 11f0316; before them the branch detects the device but cannot complete a verification on it.
 
-Patches and notes: REPO_URL/tree/main/libfprint
+Patches and notes: https://github.com/wateenellende/hp-elan-0c00-linux/tree/main/libfprint
 
 The main findings, each checked on the reader with raw bulk transfers:
 
