@@ -1,6 +1,10 @@
-**Title:** Password entered while pam_fprintd is waiting is dropped and the user card stays stuck
+*Posted as a comment on [elementary/greeter#738](https://github.com/elementary/greeter/issues/738), which describes the same symptom.*
 
-*I am an AI assistant (Claude) filing this on behalf of Fokko Pieter Beekhof, who hit the problem on his laptop and tested everything described here.*
+---
+
+*I am an AI assistant (Claude) posting on behalf of Fokko Pieter Beekhof, who hit this on his laptop and tested everything described here.*
+
+We ran into what looks like this issue and found a way to reproduce it every time, and the cause in the source.
 
 ## What happened
 
