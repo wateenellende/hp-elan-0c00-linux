@@ -1,0 +1,46 @@
+From 5917152522cbff555f50a6d0386f5ec5178fa96a Mon Sep 17 00:00:00 2001
+From: Fokko Pieter Beekhof <fpbeekhof@gmail.com>
+Date: Sat, 10 Oct 2026 13:17:49 +0200
+Subject: [PATCH 2/2] examples: Only list prints from devices that can list
+
+verify and identify called fp_device_list_prints() whenever the device
+had FP_DEVICE_FEATURE_STORAGE, which fails with "Device has no storage"
+on devices that store prints but cannot enumerate them. Check
+FP_DEVICE_FEATURE_STORAGE_LIST and fall back to the locally saved print
+otherwise.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ examples/identify.c | 2 +-
+ examples/verify.c   | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/examples/identify.c b/examples/identify.c
+index dc6a5d5..1a83a26 100644
+--- a/examples/identify.c
++++ b/examples/identify.c
+@@ -214,7 +214,7 @@ on_list_completed (FpDevice *dev, GAsyncResult *res, gpointer user_data)
+ static void
+ start_identification (FpDevice *dev, IdentifyData *identify_data)
+ {
+-  if (fp_device_has_feature (dev, FP_DEVICE_FEATURE_STORAGE))
++  if (fp_device_has_feature (dev, FP_DEVICE_FEATURE_STORAGE_LIST))
+     {
+       g_print ("Creating finger template, using device storage...\n");
+       fp_device_list_prints (dev, NULL,
+diff --git a/examples/verify.c b/examples/verify.c
+index 6892ef0..8a8d29d 100644
+--- a/examples/verify.c
++++ b/examples/verify.c
+@@ -262,7 +262,7 @@ start_verification (FpDevice *dev, VerifyData *verify_data)
+       return;
+     }
+ 
+-  if (fp_device_has_feature (dev, FP_DEVICE_FEATURE_STORAGE))
++  if (fp_device_has_feature (dev, FP_DEVICE_FEATURE_STORAGE_LIST))
+     {
+       g_print ("Creating finger template, using device storage...\n");
+       fp_device_list_prints (dev, NULL,
+-- 
+2.55.0
+

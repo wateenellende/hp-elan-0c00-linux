@@ -1,0 +1,11 @@
+# Login and lock screen: password and fingerprint without waiting for one another.
+#
+# The password prompt comes first, so a typed password is checked at once. An empty
+# response means "use the fingerprint reader". A wrong password fails immediately
+# instead of falling through to the reader.
+auth	[success=3 default=ignore]	pam_unix.so nodelay
+auth	[success=ignore default=1]	pam_exec.so expose_authtok quiet @HELPER@
+auth	[success=1 default=ignore]	pam_fprintd.so max-tries=3 timeout=@TIMEOUT@
+auth	requisite			pam_deny.so
+auth	required			pam_permit.so
+auth	optional			pam_cap.so

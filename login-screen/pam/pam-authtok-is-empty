@@ -1,0 +1,6 @@
+#!/bin/sh
+# Called by pam_exec with expose_authtok: the response to the password prompt arrives on stdin.
+# Exits 0 when it is empty (the user asked for the fingerprint reader instead of typing a
+# password) and 1 otherwise. Nothing is stored or logged.
+n=$(tr -d '\0\n' | wc -c)
+[ "$n" -eq 0 ]
